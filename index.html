@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 95 Q50 95 50 100' stroke='%2327ae60' stroke-width='4' /%3E%3Cellipse cx='50' cy='45' rx='12' ry='30' fill='%239b59b6' /%3E%3Cellipse cx='50' cy='45' rx='12' ry='30' fill='%239b59b6' transform='rotate(35 50 60)' /%3E%3Cellipse cx='50' cy='45' rx='12' ry='30' fill='%239b59b6' transform='rotate(-35 50 60)' /%3E%3Cellipse cx='50' cy='45' rx='12' ry='30' fill='%239b59b6' transform='rotate(70 50 60)' /%3E%3Cellipse cx='50' cy='45' rx='12' ry='30' fill='%239b59b6' transform='rotate(-70 50 60)' /%3E%3Ccircle cx='50' cy='60' r='6' fill='%23f1c40f' /%3E%3C/svg%3E">
     <title>Valentine for Lily</title>
     <style>
@@ -17,32 +17,37 @@ body {
     background: #b4b3aa;
     margin: 0;
     overflow: hidden;
-    /* Prevent blue tap highlight globally */
+    /* Removes the blue tap highlight globally */
     -webkit-tap-highlight-color: transparent;
 }
 
 .card {
     position: relative;
+    /* Uses viewport width and height to ensure it fits any screen size */
+    width: 85vw;
     max-width: 260px;
-    width: 90vw;
-    height: 380px;
+    height: 75vh;
+    max-height: 380px;
     background: repeating-linear-gradient(transparent 0 calc(1.2rem - 1px), #eecfd7 0 1.2rem);
     background-color: #e4e4e4;
     border-radius: 10px;
     box-shadow: 0 0 0 6px rgba(255 255 255 / 0.1) inset, 2px 4px 10px 0 rgba(0 0 0 / 0.1);
     font-family: "Caveat", cursive;
+    /* Keeps content centered within the viewport */
+    display: flex;
+    flex-direction: column;
 }
 
 .card__content {
-    padding: 1.5rem 3rem 0 1.25rem;
+    padding: 1.5rem 1.5rem 0 1.25rem;
     font-size: 1.2rem;
     line-height: 1.3rem;
     color: #444;
+    flex-grow: 1;
 }
 
-.card__content p { margin: 0 0 1rem 0; }
+.card__content p { margin: 0 0 0.8rem 0; }
 
-/* Lily Blooming CSS */
 .lily-container {
     position: absolute;
     bottom: 15px;
@@ -53,7 +58,7 @@ body {
     align-items: flex-end;
     justify-content: center;
     cursor: pointer;
-    /* Ensures no blue box appears on tap */
+    /* Specifically removes highlight for the clickable lily */
     -webkit-tap-highlight-color: transparent;
     outline: none;
 }
@@ -80,7 +85,6 @@ body {
 .lily-center { fill: #f1c40f; } 
 .lily-stem { fill: #27ae60; }   
 
-/* Heart Pop Animations */
 .heart {
     position: absolute;
     width: 24px;
@@ -96,16 +100,16 @@ body {
     100% { transform: scale(var(--scale)); }
 }
 
-.heart--top-left     { left: -25%; top: -2%;  rotate: -7deg;  --scale: 4.6; animation-delay: 0.1s; }
-.heart--top-center   { left: 64%;  top: -5%;  rotate: -42deg; --scale: 4.6; animation-delay: 0.2s; }
-.heart--top-right    { left: 118%; top: 8%;   rotate: 10deg;  --scale: 3.6; animation-delay: 0.3s; }
-.heart--left-center  { left: -20%; top: 64%;  rotate: -23deg; --scale: 6.2; animation-delay: 0.2s; }
-.heart--bottom-center{ left: 38%;  top: 101%; rotate: 40deg;  --scale: 4.2; animation-delay: 0.3s; }
-.heart--bottom-right { left: 102%; top: 78%;  rotate: 12deg;  --scale: 5.4; animation-delay: 0.4s; }
+/* Adjusted heart positions to stay within the viewport on tall phones like S25 Ultra */
+.heart--top-left     { left: -10%; top: 5%;   rotate: -7deg;  --scale: 3.5; animation-delay: 0.1s; }
+.heart--top-center   { left: 60%;  top: -2%;  rotate: -42deg; --scale: 3.5; animation-delay: 0.2s; }
+.heart--top-right    { left: 100%; top: 10%;  rotate: 10deg;  --scale: 3.0; animation-delay: 0.3s; }
+.heart--left-center  { left: -15%; top: 60%;  rotate: -23deg; --scale: 4.5; animation-delay: 0.2s; }
+.heart--bottom-center{ left: 40%;  top: 95%;  rotate: 40deg;  --scale: 3.5; animation-delay: 0.3s; }
+.heart--bottom-right { left: 95%;  top: 80%;  rotate: 12deg;  --scale: 4.0; animation-delay: 0.4s; }
 
 @media (max-width: 480px) {
-    .lily-container { width: 95px; height: 95px; }
-    .card { height: 400px; }
+    .lily-container { width: 85px; height: 85px; }
 }
     </style>
 </head>
@@ -114,7 +118,7 @@ body {
         <div class="card__content">
             <p>In the quiet of the mountains,<br>Underneath the open sky,<br>There’s a light that’s always steady,<br>And it’s found within your eye.</p>
             <p><strong>Lily</strong>, you’re my favorite part<br>Of every single day,<br>The one who holds my hand and heart<br>In your own special way.</p>
-            <p style="text-align: left; margin-top: 1.5rem;">Happy Valentine's Day!</p>
+            <p style="text-align: left; margin-top: 1rem;">Happy Valentine's Day!</p>
         </div>
 
         <div class="hearts">
@@ -140,7 +144,6 @@ body {
     </div>
 
     <script>
-        // Automatic bloom on page load
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('lilyContainer').classList.add('is-bloomed');
