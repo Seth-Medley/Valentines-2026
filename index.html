@@ -17,6 +17,8 @@ body {
     background: #b4b3aa;
     margin: 0;
     overflow: hidden;
+    /* Prevent blue tap highlight globally */
+    -webkit-tap-highlight-color: transparent;
 }
 
 .card {
@@ -51,6 +53,9 @@ body {
     align-items: flex-end;
     justify-content: center;
     cursor: pointer;
+    /* Ensures no blue box appears on tap */
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
 }
 
 .lily-svg {
@@ -65,16 +70,17 @@ body {
     stroke-width: 1;
     transform-origin: 50px 60px; 
     transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: rotate(0deg) scale(0);
+}
+
+.is-bloomed .lily-petal {
+    transform: var(--final-rotation) scale(1);
 }
 
 .lily-center { fill: #f1c40f; } 
 .lily-stem { fill: #27ae60; }   
 
-/* Initial Animation: Blooms on Load */
-.lily-petal { transform: rotate(0deg) scale(0); }
-.is-bloomed .lily-petal { transform: var(--final-rotation) scale(1); }
-
-/* Heart Pop Animations - Restored original layout */
+/* Heart Pop Animations */
 .heart {
     position: absolute;
     width: 24px;
@@ -134,7 +140,7 @@ body {
     </div>
 
     <script>
-        // Trigger bloom on load
+        // Automatic bloom on page load
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('lilyContainer').classList.add('is-bloomed');
